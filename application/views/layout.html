@@ -16,10 +16,34 @@
 
         section.content {
             min-height: calc(100vh - 100px);
+            width: 500px;
+            margin: 0px auto;
+            background-color: red;
         }
 
         header ul li {
             display: inline-block;
+        }
+
+        div.new-post-box {
+            padding: 5px;
+        }
+
+        div.post-container {
+            border: 1px solid black;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+        img {
+            width: 450px;
+        }
+
+        div.pagination-box {
+            border: 1px solid black;
+            text-align: center;
+            padding: 5px;
+            margin-bottom: 30px;
         }
     </style>
     {% if title %}
@@ -29,56 +53,25 @@
     {% endif %}
 </head>
 <body>
+    <section class="content">
     {% if current_user.is_authenticated %}
         {% include "components/login-header.html" %}
     {% else %}
         {% include "components/logout-header.html" %}
     {% endif %}
-    <div class="alert-box">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-    </div>
-    <section class="content">
+        <div class="alert-box">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
         {% block content %}{% endblock %}
+        {% include "components/footer.html" %}
     </section>
-    {% include "components/footer.html" %}
-<!-- </head>
-<body>
-    <div class="LoginPage">
-        <div class="DonTHaveAnAccoun"><span style="color: rgba(0, 0, 0, 0.40); font-size: 14px; font-family: SF Pro Text; font-weight: 400; word-wrap: break-word">Don’t have an account? </span><span style="color: #3797EF; font-size: 14px; font-family: SF Pro Text; font-weight: 400; word-wrap: break-word">Sign up.</span></div>
-        <div class="SeperatorOr">
-          <div class="Or">OR</div>
-          <div class="Line" style="width: 132px; height: 1px; left: 0px; top: 6px; position: absolute; border: 0.33px rgba(0, 0, 0, 0.20) solid"></div>
-          <div class="Line" style="width: 132px; height: 1px; left: 225px; top: 6px; position: absolute; border: 0.33px rgba(0, 0, 0, 0.20) solid"></div>
-        </div>
-        <div class="Form">
-          <div class="ForgotPassword">Forgot password?</div>
-          <div class="Username">
-            <input type="text" class="Rectangle">
-            <div class="Username">Username</div>
-          </div>
-          <div class="Password">
-            <div class="Rectangle"></div>
-            <div class="Password">Password</div>
-          </div>
-          <div class="Button">
-            <div class="Rectangle"></div>
-            <div class="LogIn">Log in</div>
-          </div>
-        </div>
-        <img class="Igs11" style="width: 108px; height: 111px; left: 145px; top: 33px; position: absolute" src="C:\Users\User\OneDrive\Desktop\2024\PROCOD11\FLASK\MEET15\application\static\images\igs1.jpg" />
-        <div class="ByBernard">By Bernard</div>
-        <div class="Igrams">Igrams</div>
-        <div class="Rectangle1"></div>
-      </div>
-</body>
-</html> -->
 </body>
 </html>

@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_user, login_required, logout_user, current_user
 
 from application import app
@@ -9,7 +9,7 @@ from application.utils import save_image
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('profile'))
+        return redirect(url_for('profile', username=current_user.username))
 
     form = LoginForm()
 
@@ -20,7 +20,7 @@ def login():
         user = User.query.filter_by(username=username).first()
         if user and password == user.password:
             login_user(user)
-            return redirect(url_for('profile'))
+            return redirect(url_for('profile', username=current_user.username))
         else:
             flash('Invalid username or password', 'error')
 
@@ -32,10 +32,17 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-@app.route('/profile')
+# @app.route('/profile')
+# @login_required
+# def profile():
+#     return render_template('profile.html', title=f'{current_user.fullname} Profile')
+
+@app.route('/<string:username>')
 @login_required
-def profile():
-    return render_template('profile.html', title=f'{current_user.fullname} Profile')
+def profile(username):
+
+    posts = current_user.posts
+    return render_template('profile.html', title=f'{current_user.fullname} Profile', posts=posts)
 
 @app.route('/', methods=['GET', 'POST'])
 @login_required
@@ -52,7 +59,8 @@ def index():
         db.session.commit()
         flash('Your Image has been posted 📮!', 'success')
 
-    posts = Post.query.filter_by(author_id = current_user.id).all()
+    page = request.args.get('page', 1, type=int)
+    posts = Post.query.filter_by(author_id=current_user.id).order_by(Post.post_date.desc()).paginate(page=page, per_page=3)
 
     return render_template('index.html', title='Home', form=form, posts=posts)
 
@@ -70,6 +78,11 @@ def signup():
 @login_required
 def about():
     return render_template('about.html', title='About')
+
+@app.route('/resetpassword')
+def resetpassword():
+    form = ResetPasswordForm()
+    return render_template('resetpassword.html', title='Reset_Password')
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+
+        body {
+            padding: 20px;
+            align-items: center;
+        }
+
+        section.content {
+            min-height: calc(100vh - 100px);
+            width: 500px;
+            margin: 0px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px black;
+            align-items: center;
+        }
+
+        header ul li {
+            display: inline-block;
+        }
+
+        div.new-post-box {
+            padding: 5px;
+        }
+
+        div.post-container {
+            border: 1px solid black;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+        img {
+            width: 450px;
+        }
+
+        div.pagination-box {
+            border: 1px solid black;
+            text-align: center;
+            padding: 5px;
+            margin-bottom: 30px;
+        }
+
+        small.donthaveanaccount {
+          left: 120px;
+          top: 615px;
+          position: absolute;
+          text-align: center;
+        }
+
+        fieldset.boxes{
+            align-items: center;
+            display: block;
+            position: relative;
+            top: 100px;
+            padding: 10px;
+            border: white;
+        }
+
+        div.username-box {
+            height: 50px;
+            position: relative;
+            text-align: center;
+            border: whitesmoke;
+        }
+
+        div.password-box {
+            height: 50px;
+            position: relative;
+            text-align: center;
+            border: 0.5px solid white;
+        }
+
+        .input-username {
+            height: 45px;
+            width: 100%;
+            border-radius: 5px;
+            padding-left: 10px;
+        }
+
+        .input-password {
+            height: 45px;
+            width: 100%;
+            border-radius: 5px;
+            padding-left: 10px;
+        }
+
+        .btn-outline-info{
+            background-color: #63a1db;
+            text-align: center;
+            height: 45px;
+            width: 100%;
+            border-radius: 5px;
+            text-transform: capitalize;
+            color: white;
+            border: white;
+        }
+    </style>
+    {% if title %}
+        <title>Instagram Authorization</title>
+    {% else %}
+        <title>Website</title>
+    {% endif %}
+</head>
+<body>
+    <section class="content">
+    <!-- {% if current_user.is_authenticated %}
+        {% include "components/login-header.html" %} -->
+    <!-- {% else %}
+        {% include "components/logout-header.html" %} -->
+    {% endif %}
+        <div class="alert-box">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        {% block content %}{% endblock %}
+        {% include "components/footer.html" %}
+    </section>
+</body>
+</html>

@@ -1,52 +1,55 @@
-{% extends 'layout.html' %}
+{% extends 'loglay.html' %}
 
 {% block content %}
 	<div class="">
         <form method="POST" action="">
 			{{ form.hidden_tag() }}
-			<fieldset class="">
-				<legend class="">Login</legend>
+			<fieldset class="boxes">
+				<!-- <legend class="">lOGIN</legend> -->
 
-				<div class="">
-					{{ form.username.label(class="") }}
+				<div class="username-box">
+					<!-- {{ form.username.label(class="") }} -->
 
 					{% if form.username.errors%}
-						{{ form.username(class="") }}
+						{{ form.username(class="input-username") }}
 						<div class="">
 							{% for error in form.username.errors %}
 								<span>{{ error }}</span>
 							{% endfor %}
 						</div>
 					{% else %}
-						{{ form.username(class=" ") }}
+						{{ form.username(class="input-username") }}
 					{% endif %}
 
 				</div>
 
-				<div class="">
-					{{ form.password.label(class="") }}
+				<div class="password-box">
+					<!-- {{ form.password.label(class="") }} -->
 
 					{% if form.password.errors%}
-						{{ form.password(class="") }}
+						{{ form.password(class="input-password") }}
 						<div class="">
 							{% for error in form.password.errors %}
 								<span>{{ error }}</span>
 							{% endfor %}
 						</div>
 					{% else %}
-						{{ form.password(class=" ") }}
+						{{ form.password(class="input-password") }}
 					{% endif %}
 
 				</div>
-			</fieldset>
-			<div class="">
-				{{ form.submit(class="btn btn-outline-info") }}
 				<small class="">
-					<a href="#">Lupa Kata Sandi?</a>
+					<a href="{{ url_for('resetpassword') }}" style="text-decoration: none; font-weight: bold; position: relative; align-items: center; left: 350px; color: #3797EF; font-size: smaller;">Forgot Password?</a>
 				</small>
-			</div>
-			<small class="">
-				<a href="{{ url_for('signup') }}">Belum punya akun ?</a>
+				<div class="submit">
+					{{ form.submit(class="btn-outline-info") }}
+				</div>
+			</fieldset>
+			<!-- <small class="">
+				<a href="{{ url_for('resetpassword') }}" style="text-decoration: none; font-weight: 500; position: relative; top: 250px; align-items: center; left: 350px; color: #3797EF; font-size: smaller;">Forgot Password?</a>
+			</small> -->
+			<small class=".donthaveanaccount">
+				<a href="{{ url_for('signup') }}" style="position: relative; text-align: center; top: 400px; align-items: center; margin-left: 250px; color: #3797EF; text-decoration: none;">Sign up.</a>
 			</small>
 
 		</form>

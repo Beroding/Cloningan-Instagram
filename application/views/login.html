@@ -2,6 +2,8 @@
 
 {% block content %}
 	<div class="">
+		<img src="C:\Users\User\OneDrive\Desktop\2024\PROCOD11\FLASK\MEET15\application\static\images\igs1.jpg" alt="" class="igs1">
+		<div class="igrams">Igrams</div>
         <form method="POST" action="">
 			{{ form.hidden_tag() }}
 			<fieldset class="boxes">
@@ -39,17 +41,14 @@
 
 				</div>
 				<small class="">
-					<a href="{{ url_for('resetpassword') }}" style="text-decoration: none; font-weight: bold; position: relative; align-items: center; left: 350px; color: #3797EF; font-size: smaller;">Forgot Password?</a>
+					<a href="{{ url_for('forgotpassword') }}" style="text-decoration: none; position: relative; align-items: center; margin-left: 290px; top: 5px; color: #3797EF;">Forgot Password?</a>
 				</small>
 				<div class="submit">
 					{{ form.submit(class="btn-outline-info") }}
 				</div>
 			</fieldset>
-			<!-- <small class="">
-				<a href="{{ url_for('resetpassword') }}" style="text-decoration: none; font-weight: 500; position: relative; top: 250px; align-items: center; left: 350px; color: #3797EF; font-size: smaller;">Forgot Password?</a>
-			</small> -->
 			<small class=".donthaveanaccount">
-				<a href="{{ url_for('signup') }}" style="position: relative; text-align: center; top: 400px; align-items: center; margin-left: 250px; color: #3797EF; text-decoration: none;">Sign up.</a>
+				<a href="{{ url_for('signup') }}" style="position: relative; text-align: center; top: 350px; align-items: center; left: 250px; color: #3797EF; text-decoration: none;">Sign up.</a>
 			</small>
 
 		</form>

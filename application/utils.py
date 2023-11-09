@@ -24,6 +24,11 @@ def exists_username(form, username):
     user = User.query.filter_by(username = username.data).first()
     if user:
         raise ValidationError("Username already exists. Please use a different username")
+
+# def confirm_password(form, password, confirm_password):
+#     user = User.query.filter_by(password = password.data, confirm_password = confirm_password.data).first()
+#     if password != confirm_password:
+#         raise ValidationError("Password doesn't match !")
 #END OF FORM UTILS
 
 

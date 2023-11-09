@@ -15,15 +15,15 @@ class SignUpForm(FlaskForm):
     username            = StringField("username", validators=[DataRequired(), Length(min=4, max=12), exists_username])
     fullname            = StringField("full name", validators=[DataRequired(), Length(min=4, max=16)])
     email               = EmailField("email", validators=[DataRequired(), Email(), exists_email])
-    password            = PasswordField("password", validators=[DataRequired(), Length(min=8)])
-    confirm_password    = PasswordField("confirm password", validators=[DataRequired(), Length(min=8), EqualTo("password")])
+    password            = PasswordField("password", validators=[DataRequired(), Length(min=4)])
+    confirm_password    = PasswordField("confirm password", validators=[DataRequired(), Length(min=4), EqualTo("password", message="Password Doesn't Match")])
     submit              = SubmitField("sign up")
 
-class EditProfileForm(FlaskForm):
-    name                = StringField("name", validators=[DataRequired(), Length(min=4)])
-    username            = StringField("username", validators=[DataRequired(), Length(min=4, max=12), exists_username])
+class EditProfileForm(FlaskForm): 
+    fullname            = StringField("fullname", validators=[DataRequired(), Length(min=4)])
+    username            = StringField("username", validators=[DataRequired(), Length(min=4, max=12)])
     email               = EmailField("email", validators=[DataRequired(), Email(), exists_email])
-    bio                 = StringField("bio", validators=[Length(min=10)])
+    bio                 = StringField("bio")
     profile_pic         = FileField("profile picture", validators=[FileAllowed(["jpg", "png", "jpeg"])])
     submit              = SubmitField("update profile")
 
@@ -48,5 +48,9 @@ class CreatePostForm(FlaskForm):
     submit              = SubmitField("post")
 
 class EditPostForm(FlaskForm):
-    caption             = StringField("caption")
+    password            = None
+    confirm_password    = None
+    email               = None
+    bio                 = StringField("bio")
+    profile_pic         = FileField("picture picture", validators=[FileAllowed(["jpg", "png", "jpeg"])])
     submit              = SubmitField("update post")

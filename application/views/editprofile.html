@@ -8,17 +8,17 @@
             <legend class="">Edit Profile</legend>
 
             <div class="">
-                {{ form.name.label(class="") }}
+                {{ form.fullname.label(class="") }}
 
-                {% if form.name.errors%}
-                    {{ form.name(class="") }}
+                {% if form.fullname.errors%}
+                    {{ form.fullname(class="") }}
                     <div class="">
-                        {% for error in form.name.errors %}
+                        {% for error in form.fullname.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.name(class="form-control ") }}
+                    {{ form.fullname(class="form-control ") }}
                 {% endif %}
 
             </div>
@@ -55,7 +55,7 @@
 
             </div>
 
-            <div class="">
+            <div class="form-group">
                 {{ form.email.label(class="") }}
 
                 {% if form.email.errors%}

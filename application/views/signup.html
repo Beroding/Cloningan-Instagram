@@ -77,7 +77,7 @@
                 {% if form.confirm_password.errors%}
                     {{ form.confirm_password(class="") }}
                     <div class="">
-                        {% for error in form.password.errors %}
+                        {% for error in form.confirm_password.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
                     </div>

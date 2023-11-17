@@ -38,8 +38,9 @@ class ForgotPasswordForm(FlaskForm):
     submit              = SubmitField("send link verification to email")
 
 class VerificationResetPasswordForm(FlaskForm):
-    password            = PasswordField("new password", validators=[DataRequired(), Length(min=8)])
-    confirm_password    = PasswordField("confirm new password", validators=[DataRequired(), Length(min=8), EqualTo("password")])
+    username            = StringField("username", validators=[DataRequired()])              
+    password            = PasswordField("new password", validators=[DataRequired(), Length(min=4, max=12)])
+    confirm_password    = PasswordField("confirm new password", validators=[DataRequired(), Length(min=4, max=12), EqualTo("password")])
     submit              = SubmitField("reset password")
 
 class CreatePostForm(FlaskForm):

@@ -23,6 +23,7 @@
             padding: 20px;
             box-shadow: 0px 0px 10px black;
             align-items: center;
+            /* background-color: red; */
         }
 
         header ul li {
@@ -39,9 +40,9 @@
             text-align: center;
         }
 
-        /* img {
+        img {
             width: 450px;
-        } */
+        }
 
         div.pagination-box {
             border: 1px solid black;
@@ -50,21 +51,41 @@
             margin-bottom: 30px;
         }
 
-        small.donthaveanaccount {
-          margin-left: 120px;
-          margin-top: 615px;
-          position: absolute;
-          text-align: center;
+        div.image-container {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            position: relative;
         }
 
-        fieldset.boxes{
+        div.image-container img {
+            width: 100%;
+            height: 100%;
+            padding: 1px;
+        }
+
+        div.profile-photo img {
+            border-radius: 100%;
+            max-width: 20vh;
+            max-height: 20vh;
+        }
+
+        .post-header {
+            display: flex;
+            gap: 10px;
+        }
+
+        .post-header img {
+            border-radius: 50%;
+        }
+
+        /* fieldset.boxes{
             align-items: center;
             display: block;
             position: relative;
             top: 70px;
             padding: 10px;
             border: white;
-        }
+        } */
 
         div.username-box {
             height: 50px;
@@ -73,101 +94,27 @@
             border: whitesmoke;
         }
 
-        div.password-box {
-            height: 50px;
-            position: relative;
-            text-align: center;
-            border: 0.5px solid white;
-        }
-
-        div.confirm-box{
-            height: 50px;
-            position: relative;
-            text-align: center;
-            border: 0.5px solid white;
-        }
-
         .input-username {
             height: 45px;
             width: 100%;
             border-radius: 5px;
             padding-left: 10px;
+            /* background-color: blue; */
         }
-
-        .input-password {
-            height: 45px;
-            width: 100%;
-            border-radius: 5px;
-            padding-left: 10px;
-        }
-
-        .input-confirm {
-            height: 45px;
-            width: 100%;
-            border-radius: 5px;
-            padding-left: 10px;
-        }
-
-        .btn-outline-info{
-            background-color: #63a1db;
-            text-align: center;
-            height: 45px;
-            width: 100%;
-            border-radius: 5px;
-            top: 40px;
-            text-transform: capitalize;
-            color: white;
-            border: white;
-            position: relative;
-        }
-
-        div.alert-box {
-            color: #3797EF;
-            text-align: center;
-            top: 260px;
-            position: relative;
-            font-size: normal;
-        }
-
-        img.igs1 {
-            width: 120px;
-            height: 120px;
-            position: relative;
-            align-items: center;
-            left: 145px;
-            top: 15px;
-        }    
-
-        div.igrams{
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 60px;
-            text-align: center;
-            position: relative;
-            top: 30px;
-        }
-
-        form.menghilang::placeholder:focus {
-            opacity: 0%;
-        }
-
-        /* div.username-box {
-            background-color: red;
-            position: relative;
-        } */
 
     </style>
     {% if title %}
-        <title>Instagram Authorization</title>
+        <title>{{ title }} - Website</title>
     {% else %}
         <title>Website</title>
     {% endif %}
 </head>
 <body>
     <section class="content">
-    <!-- {% if current_user.is_authenticated %}
-        {% include "components/login-header.html" %} -->
-    <!-- {% else %}
-        {% include "components/logout-header.html" %} -->
+    {% if current_user.is_authenticated %}
+        {% include "components/login-header.html" %}
+    {% else %}
+        {% include "components/logout-header.html" %}
     {% endif %}
         <div class="alert-box">
             {% with messages = get_flashed_messages(with_categories=true) %}

@@ -1,29 +1,29 @@
-{% extends 'layout.html' %}
+{% extends 'signlay.html' %}
 
 {% block content %}
 <div class="">
     <form method="POST" action="">
         {{ form.hidden_tag() }}
-        <fieldset class="">
+        <fieldset class="boxes">
             <legend class="">Daftar</legend>
 
-            <div class="">
+            <div class="username-box">
                 {{ form.username.label(class="") }}
 
                 {% if form.username.errors%}
-                    {{ form.username(class="") }}
+                    {{ form.username(class="input-username") }}
                     <div class="">
                         {% for error in form.username.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.username(class="form-control ") }}
+                    {{ form.username(class="input-username") }}
                 {% endif %}
 
             </div>
 
-            <div class="">
+            <div class="fullname-box">
                 {{ form.fullname.label(class="") }}
 
                 {% if form.fullname.errors%}
@@ -39,7 +39,7 @@
 
             </div>
 
-            <div class="">
+            <div class="email-box">
                 {{ form.email.label(class="") }}
 
                 {% if form.email.errors%}
@@ -55,7 +55,7 @@
 
             </div>
 
-            <div class="">
+            <div class="password-box">
                 {{ form.password.label(class="") }}
 
                 {% if form.password.errors%}
@@ -71,7 +71,7 @@
 
             </div>
 
-            <div class="">
+            <div class="confirm_password-box">
                 {{ form.confirm_password.label(class="") }}
 
                 {% if form.confirm_password.errors%}

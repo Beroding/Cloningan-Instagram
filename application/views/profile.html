@@ -1,8 +1,10 @@
-{% extends "layout.html" %}
+{% extends "prolay.html" %}
 
 {% block content %}
     <div class="profile-card">
-        
+        <div class="profile-photo">
+            <img src="{{ url_for('static', filename='images/' + current_user.profile_pic ) }}" alt="Profile Photo">
+        </div>
         <div class="profile-info">
             <h2>{{current_user.fullname}}</h2>
             <p>{{ current_user.bio }}</p>

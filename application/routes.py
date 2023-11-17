@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, flash, request
+from flask import render_template, redirect, url_for, flash, request, make_response, jsonify
 from flask_login import login_user, login_required, logout_user, current_user
 
 from application import app
@@ -59,7 +59,7 @@ def index():
         flash('Your Image has been posted 📮!', 'success')
 
     page = request.args.get('page', 1, type=int)
-    posts = Post.query.filter_by(author_id=current_user.id).order_by(Post.post_date.desc()).paginate(page=page, per_page=2)
+    posts = Post.query.filter_by(author_id = current_user.id).order_by(Post.post_date.desc()).paginate(page=page, per_page=2)
 
     return render_template('index.html', title='Home', form=form, posts=posts)
 
@@ -94,6 +94,7 @@ def editprofile():
             user.username = form.username.data
         user.fullname = form.fullname.data
         user.bio      = form.bio.data
+        user.email    = form.email.data
 
         if form.profile_pic.data:
             pass
@@ -105,6 +106,7 @@ def editprofile():
     form.username.data = current_user.username
     form.fullname.data = current_user.fullname
     form.bio.data      = current_user.bio
+    form.email.data    = current_user.email
     
     return render_template('editprofile.html', title=f'Edit {current_user.username} Profile', form=form)
 
@@ -113,10 +115,31 @@ def editprofile():
 def about():
     return render_template('about.html', title='About')
 
-@app.route('/forgotpassword')
+@app.route('/forgotpassword', methods=['GET', 'POST'])
 def forgotpassword():
-    form = ForgotPasswordForm()
-    return render_template('forgotpassword.html', title='Forgot_Password')
+    form = VerificationResetPasswordForm()
+    if form.validate_on_submit():
+        user = User.query.get(current_user.id)
+        if form.username.data != user.username:
+            user.username = form.username.data
+        return redirect(url_for('login'))
+    return render_template('forgotpassword.html', title='Reset', form=form)
+
+@app.route('/like', methods=['GET', 'POST'])
+@login_required
+def like():
+    data = request.json
+    post_id = int(data['postId'])
+    like = Like.query.filter_by(user_id=current_user.id,post_id=post_id).first()
+    if not like:
+        like = Like(user_id=current_user.id, post_id=post_id)
+        db.session.add(like)
+        db.session.commit()
+        return make_response(jsonify({"status" : True}), 200)
+    
+    db.session.delete(like)
+    db.session.commit()
+    return make_response(jsonify({"status" : False}), 200)
 
 if __name__ == '__main__':
     app.run(debug=True)

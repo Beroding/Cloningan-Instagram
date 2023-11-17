@@ -27,12 +27,39 @@
 
     <div class="post-container">
         {% for post in posts %}
-            <div class="port" style="border:1px black solid; margin: 10px 0px;">
+            <div class="post" style="border:1px black solid; margin: 10px 0px;">
+                <div class="post-header">
+                    <img src="{{ url_for('static', filename='images/' + post.posts_owner.profile_pic ) }}" alt="Post owner" style="height: 30px; width: 30px;">
+                    <h2>{{ post.posts_owner.username }}</h2>
+                </div>
                 <img src="{{ url_for('static', filename='' + post.photo) }}" alt="Post Image">
                 <p>{{ post.caption }}</p>
+
+                <div class="post-footer">
+                    <span id="likeBtn" data-post-id="{{ post.id }}">💗</span><span id="likeCounter">{{post.likes | length }}</span>
+                    <span id="commentBtn" data-post-id="{{ post.id }}">💬</span><span id="commentCounter">{{ post.comments | length }}</span>
+                </div>
             </div>
         {% endfor %}
     </div>
+    <script>
+        document.querySelectorAll("#likeBtn").forEach(btn => {
+            btbn.addEventListener('click', function(){
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', 'http://127.0.0.1:5000/like', true);
+                xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        console.log(response.status);
+                    }
+                };
+                const data = JSON.stringify({ 'postId': this.dataset.postId });
+                xhr.send(data);
+            })
+        })
+    </script>
     <div class="pagination-box">
         {% for page_number in posts.iter_pages() %}
             {% if page_number == posts.page %}

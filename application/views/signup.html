@@ -8,7 +8,7 @@
             <legend class="">Daftar</legend>
 
             <div class="username-box">
-                {{ form.username.label(class="") }}
+                <!-- {{ form.username.label(class="") }} -->
 
                 {% if form.username.errors%}
                     {{ form.username(class="input-username") }}
@@ -24,7 +24,7 @@
             </div>
 
             <div class="fullname-box">
-                {{ form.fullname.label(class="") }}
+                <!-- {{ form.fullname.label(class="") }} -->
 
                 {% if form.fullname.errors%}
                     {{ form.fullname(class="") }}
@@ -40,7 +40,7 @@
             </div>
 
             <div class="email-box">
-                {{ form.email.label(class="") }}
+                <!-- {{ form.email.label(class="") }} -->
 
                 {% if form.email.errors%}
                     {{ form.email(class="") }}
@@ -56,7 +56,7 @@
             </div>
 
             <div class="password-box">
-                {{ form.password.label(class="") }}
+                <!-- {{ form.password.label(class="") }} -->
 
                 {% if form.password.errors%}
                     {{ form.password(class="") }}
@@ -72,7 +72,7 @@
             </div>
 
             <div class="confirm_password-box">
-                {{ form.confirm_password.label(class="") }}
+                <!-- {{ form.confirm_password.label(class="") }} -->
 
                 {% if form.confirm_password.errors%}
                     {{ form.confirm_password(class="") }}
@@ -90,7 +90,7 @@
         <div class="">
             {{ form.submit(class="btn btn-outline-info") }}
             <small class="">
-                <a href="{{ url_for('login') }}">Sudah punya akun?</a>
+                <a href="{{ url_for('login') }}" style="text-decoration: none; color: #3797EF;">Sudah punya akun?</a>
             </small>
         </div>
         

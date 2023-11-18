@@ -111,11 +111,11 @@
 </head>
 <body>
     <section class="content">
-    {% if current_user.is_authenticated %}
+    <!-- {% if current_user.is_authenticated %}
         {% include "components/login-header.html" %}
     {% else %}
         {% include "components/logout-header.html" %}
-    {% endif %}
+    {% endif %} -->
         <div class="alert-box">
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
